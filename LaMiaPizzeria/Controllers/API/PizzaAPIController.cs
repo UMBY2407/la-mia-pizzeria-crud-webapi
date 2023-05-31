@@ -21,7 +21,7 @@ namespace LaMiaPizzeria.Controllers.API
 		[HttpGet("{id}")]
 		public IActionResult SearchById(int id)
 		{
-			using (PizzeriaContext db = new PizzeriaContext)
+			using (PizzeriaContext db = new PizzeriaContext())
 			{
 				Pizza? pizzaToSearch = db.Pizzas.Where(pizza => pizza.Id == id).FirstOrDefault();
 
@@ -61,7 +61,7 @@ namespace LaMiaPizzeria.Controllers.API
 				return BadRequest(); 
 			} else
 			{
-				using(PizzeriaContext db = new PizzeriaContext)
+				using(PizzeriaContext db = new PizzeriaContext())
 				{
 					db.Pizzas.Add(pizza);
 					db.SaveChanges();
