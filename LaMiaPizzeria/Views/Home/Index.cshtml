@@ -22,15 +22,34 @@
 		</div>
 	</div>
 </div>
+<div class="w-50 m-auto">
+	<div id="spinner" class="spinner-border text-primary" role="status">
+	</div>
+
+	<div id="container_no_pizza" class="d-none"> <h3>Non ci sono pizze da visualizzare</h3></div>
+	<div id="container_cards" class="d-none d-flex justify-content-between gap-3 flex-wrap">
+		<!--
+				Questa sezione dovrà essere popolata da Javascript con i dati ricevuti con axios.
+				Per fare questo ho dato un id univoco a questo <div> dove potro usarlo per iniettare con
+				javascript le varie cards!.
+		-->
+
+
+	</div>
+</div>
 
 @section ScriptSection{
 			axios.get("https://localhost:7215/api/PizzaAPI/GetPizzas").then((result) => {
 			const listPizzas = result.data;
+
+			debugger;
+
+
 			if(listPizzas.length == 0){
-				document.getElementById("container_no_article").classList.remove("d-none");
+				document.getElementById("container_no_pizza").classList.remove("d-none");
 				document.getElementById("spinner").classList.add("d-none");
 			} else {
-				listPizzas.forEach(article => {
+				listPizzas.forEach(pizza => {
 				document.getElementById("container_cards").innerHTML += `
 				<div class="card" style="width: 18rem;">
 					<img class="card-img-top" src="${pizza.image}" alt="${pizza.title}">

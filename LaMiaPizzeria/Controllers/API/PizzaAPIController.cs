@@ -9,6 +9,7 @@ namespace LaMiaPizzeria.Controllers.API
 	[ApiController]
 	public class PizzaAPIController : Controller
 	{
+		[HttpGet]
 		public IActionResult GetPizzas()
 		{
 			using(PizzeriaContext db = new PizzeriaContext())
