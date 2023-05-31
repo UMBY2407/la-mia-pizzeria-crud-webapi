@@ -1,0 +1,49 @@
+﻿@using LaMiaPizzeria.Models.ModelForViews
+@model PizzaListCategory;
+
+<h1>Aggiungi qui la tua Nuova Pizza!</h1>
+<div class="container">
+	<form asp-controller="Pizza" asp-action="Create" metohd="post">
+		<div class="row">
+			<div class="col">
+			
+					@Html.AntiForgeryToken()
+					<div class="mb-3">
+						<label asp-for="Pizzas.Name" class="form-label">Nome Pizza</label>
+						<input asp-for="Pizzas.Name" type="text" class="form-control" placeholder="Nome..." required>
+						<span asp-validation-for="Pizzas.Name" class="text-danger"></span>
+					</div>
+					<div class="mb-3">
+						<label asp-for="Pizzas.Description" class="form-label">Descrizione Pizza</label>
+						<textarea asp-for="Pizzas.Description" rows="10" class="form-control" placeholder="Descrizione..."></textarea>
+						<span asp-validation-for="Pizzas.Description" class="text-danger"></span>
+					</div>
+					<div class="mb-3">
+						<label asp-for="Pizzas.Image" class="form-label">URL Immagine o Percorso</label>
+						<input asp-for="Pizzas.Image" type="text" class="form-control" placeholder="URL/Percorso..." required>
+						<span asp-validation-for="Pizzas.Image" class="text-danger"></span>
+					</div>
+					<div class="mb-3">
+						<label asp-for="Pizzas.Price" class="form-label">Prezzo Pizza</label>
+						<input asp-for="Pizzas.Price" type="text" class="form-control" placeholder="Prezzo..." required>
+						<span asp-validation-for="Pizzas.Price" class="text-danger"></span>
+					</div>
+					<div class="mb-3">
+						<strong>Categoria:</strong>
+						<select asp-for="Pizzas.PizzaCategoryId" title="PizzaCategory" rows="10" class="d-block w-100">
+							<option value=""></option>
+							@foreach (PizzaCategory category in Model.PizzaCategories ?? new List<PizzaCategory>())
+							{
+								<option value="@category.Id" selected="@(Model.Pizzas.PizzaCategoryId == category.Id ? "selected" : null)">@category.Title</option>
+							}
+						</select>
+					</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<button type="submit" class="btn btn-primary">Aggiungi</button>
+			</div>
+		</div>
+	</form>
+</div>
